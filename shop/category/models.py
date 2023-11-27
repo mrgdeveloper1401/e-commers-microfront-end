@@ -1,5 +1,6 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
+from .manager import CategortPublisher
 
 
 class Category(MPTTModel):
@@ -11,6 +12,13 @@ class Category(MPTTModel):
     def __str__(self) -> str:
         return self.category_name
     
+    objects = CategortPublisher()
+    
     class MPTTMeta:
         db_table = 'category'
-        order_insertion_by = ('category_name')
+        order_insertion_by = ('-category_name',)
+        
+    
+class Categoryproxy(Category):
+    class Meta:
+        proxy = True

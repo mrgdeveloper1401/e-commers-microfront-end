@@ -8,6 +8,9 @@ class OptionGroup(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+    class Meta:
+        db_table = 'option_group'
 
 
 class OptionGroupValue(models.Model):
@@ -16,6 +19,9 @@ class OptionGroupValue(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    class Meta:
+        db_table = 'option_group_value'
 
 
 class ProductClass(models.Model):
@@ -34,6 +40,9 @@ class ProductClass(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+    class Meta:
+        db_table = 'product_class'
 
 
 class ProductAttribute(models.Model):
@@ -50,6 +59,9 @@ class ProductAttribute(models.Model):
     required = models.BooleanField(default=False)
     option_group = models.ForeignKey(OptionGroup, on_delete=models.PROTECT, null=True, blank=True)
 
+    class Meta:
+        db_tabel = 'product_attribute'
+
 
 class Option(models.Model):
     class OptionTypeChoose(models.TextChoices):
@@ -62,6 +74,9 @@ class Option(models.Model):
     title = models.CharField(max_length=100)
     types = models.CharField(max_length=12, choices=OptionTypeChoose.choices, default=OptionTypeChoose.TEXT)
     required = models.BooleanField(default=False)
+
+    class Meta:
+        db_tabel = 'option'
 
 
 class Product(models.Model):
@@ -87,6 +102,9 @@ class Product(models.Model):
     def __str__(self) -> str:
         return self.title
     
+    class Meta:
+        db_table = 'product'
+    
     @property
     def main_image(self):
         if self.product_images.exists():
@@ -104,6 +122,7 @@ class ProductAttributeValue(models.Model):
 
     class Meta:
         unique_together = ('product', 'attribute')
+        db_tabel = 'product_attribute'
 
 
 class ProductRecomendation(models.Model):
@@ -114,6 +133,7 @@ class ProductRecomendation(models.Model):
     class Meta:
         unique_together = ('primary', 'recommendation')
         ordering = ('primary', '-rank')
+        db_tabel = 'product_recomendation'
 
 
 class ProductImage(models.Model):
@@ -126,6 +146,7 @@ class ProductImage(models.Model):
     
     class Meta:
         ordering = ('display_order',)
+        db_tabel = 'product_image'
         
     def delete(self, using: Any = ..., keep_parents: bool = ...) -> tuple[int, dict[str, int]]:
         super().delete(using, keep_parents)

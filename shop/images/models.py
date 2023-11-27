@@ -27,4 +27,7 @@ class Image(models.Model):
         if Image.objects.filter(image_hash=self.image_hash).exists():
             raise Deupicated('Image is elready exists')
         return super().save()
+    
+    class Meta:
+        db_table = 'image'
         

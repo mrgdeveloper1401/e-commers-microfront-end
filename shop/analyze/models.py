@@ -14,4 +14,5 @@ class LogEntries(LogEntry):
 class ActionHistory(LogEntry):
     class Meta:
         proxy = True
+        db_table = 'action_history'
 
