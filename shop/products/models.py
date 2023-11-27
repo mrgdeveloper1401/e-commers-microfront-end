@@ -60,7 +60,7 @@ class ProductAttribute(models.Model):
     option_group = models.ForeignKey(OptionGroup, on_delete=models.PROTECT, null=True, blank=True)
 
     class Meta:
-        db_tabel = 'product_attribute'
+        db_table = 'product_attribute'
 
 
 class Option(models.Model):
@@ -76,7 +76,7 @@ class Option(models.Model):
     required = models.BooleanField(default=False)
 
     class Meta:
-        db_tabel = 'option'
+        db_table = 'option'
 
 
 class Product(models.Model):
@@ -122,7 +122,7 @@ class ProductAttributeValue(models.Model):
 
     class Meta:
         unique_together = ('product', 'attribute')
-        db_tabel = 'product_attribute'
+        db_table = 'product_attribute_value'
 
 
 class ProductRecomendation(models.Model):
@@ -133,7 +133,7 @@ class ProductRecomendation(models.Model):
     class Meta:
         unique_together = ('primary', 'recommendation')
         ordering = ('primary', '-rank')
-        db_tabel = 'product_recomendation'
+        db_table = 'product_recomendation'
 
 
 class ProductImage(models.Model):
@@ -146,7 +146,7 @@ class ProductImage(models.Model):
     
     class Meta:
         ordering = ('display_order',)
-        db_tabel = 'product_image'
+        db_table = 'product_image'
         
     def delete(self, using: Any = ..., keep_parents: bool = ...) -> tuple[int, dict[str, int]]:
         super().delete(using, keep_parents)

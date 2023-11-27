@@ -11,13 +11,13 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('category_name',)
     list_display = ('category_name', 'is_publish', 'parent')
     list_per_page = 10
-    list_filter = ('is_publish', )
+    list_filter = ('is_publish', 'created_at', 'modified_at')
     actions = ('disable_category', )
+    readonly_fields = ('created_by', 'modified_by', 'created_at','modified_at',)
     
     def disable_category(self, request, queryset):
         queryset.update(is_publish=False)
 
-    
 
 class CategoryInline(admin.TabularInline):
     model = Category

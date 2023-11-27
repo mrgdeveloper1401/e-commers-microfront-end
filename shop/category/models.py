@@ -1,9 +1,10 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from .manager import CategortPublisher
+from core.models import AuditableModel
 
 
-class Category(MPTTModel):
+class Category(MPTTModel, AuditableModel):
     category_name = models.CharField(max_length=50, db_index=True)
     slug = models.SlugField(allow_unicode=True, unique=True)
     is_publish = models.BooleanField(default=True)
@@ -11,7 +12,7 @@ class Category(MPTTModel):
     
     def __str__(self) -> str:
         return self.category_name
-    
+
     objects = CategortPublisher()
     
     class MPTTMeta:
